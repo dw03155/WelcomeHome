@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ch05/register.html</title>
+</head>
+
+<body>
+    <form action="register.jsp" method ="post">
+        <table>
+            <caption>회원가입</caption>
+            <tbody>
+
+                <tr>
+                    <td><label for="user_id">회원ID</label></td>
+                    <td><input type="text" name="user_id" id="user_id"></td>
+                </tr>
+
+                <tr>
+                    <td><label for="user_pw">회원PW</label></td>
+                    <td><input type="password" name="user_pw" id="user_pw"></td>
+                </tr>
+
+                <tr>
+                    <td><label for="user_nm">회원이름</label></td>
+                    <td><input type="text" name="user_nm" id="user_nm"></td>
+                </tr>
+
+                <tr>
+                    <td><label for="user_gen">회원성별</label></td>
+                    <td><input type="radio" name="user_gen" id="user_gen" value="M">남
+                        <input type="radio" name="user_gen" id="user_gen" value="W">여
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><label for="user_hb">회원취미</label></td>
+                    <td><select name="" id="">
+                            <option value="movie">영화</option>
+                            <option value="sport">운동</option>
+                            <option value="travel">여행</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><label for="user_birth">회원생일</label></td>
+                    <td><input type="date" name="user_birth" id="user_birth"></td>
+                </tr>
+
+                <tr align="center">
+                    <td colspan ="2">
+                        <input type="submit" value="회원가입">
+                        <input type="reset" value="취소">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</body>
+
+</html>

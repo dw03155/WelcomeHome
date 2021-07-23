@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ch06/12_css_com.html</title>
+    <style>
+        /* div 하위 자식 중에 h2태그*/
+        /* div>h2 {
+            color: red;
+        } */
+        /* div 하위 자식 중에 h2태그 중에 class가 favorite인 태그*/
+        div>h2.favorite {
+            color: tomato;
+        }
+
+        /* div 자식 모두 (후손) 중에 li태그 */
+        div li:nth-of-type(1) {
+            background-color: crimson;
+        }
+
+        /* h2 형제 중에 h3태그 */
+        h2~h3 {
+            border: 1px dotted cornflowerblue;
+            ;
+        }
+
+        /* h2 바로 옆에 h3 태그 */
+        h2+h3 {
+            color: gold;
+        }
+
+        h2,h3,ul,li {
+            background-color: lightgrey;
+        }
+        /* important : 무조건 */
+        li{
+            background-color: lightseagreen !important;
+        }
+        #best{
+            font-size: 35px;
+        }
+        ul
+    </style>
+</head>
+
+<body>
+    <div>
+        <h2 class='favorite'>Apple</h2>
+        <h2>Peach</h2>
+        <h3>Banana</h3>
+        <h3>Orange</h3>
+        <ul id ='best'>
+            <li>Cherry</li>
+            <li>Mango</li>
+        </ul>
+    </div>
+    <h2 class='favorite'>Melon</h2>
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ch04/15_video.html</title>
+</head>
+<body>
+    <h3>비디오 자동재생</h3>
+    <video src="../img/bear.mp4" controls loop autoplay width="300" height="250"></video>
+    <h3>비디오 수동재생</h3>
+    <video src="../img/bear.mp4" controls width="300" height="250"></video>
+    <h3>비디오 다중재생-비디오 파일이 현재 폴더에 있는 경우</h3>
+    <video controls autoplay width="300" height="250">
+        <source src="../img/small.mp4" type="video/mp4">
+        <source src="../img/small.ogv" type="video/ogv">
+        <source src="../img/small.webm" type="video/webm">
+        비디오 파일을 재생할 수 없습니다.
+    </video>
+</body>
+</html>

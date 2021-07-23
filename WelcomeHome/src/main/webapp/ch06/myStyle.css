@@ -1,0 +1,37 @@
+p {
+    background-color: lightblue;
+}
+
+h2 {
+    background-color: lightgoldenrodyellow;
+}
+
+/* #show : id값이 show인 것만 style 지정 */
+h2#show {
+    color: rgb(156, 228, 123);
+}
+
+#show {
+    color: rgb(181, 123, 228);
+}
+
+/* .show : class값이 show인 것만 style 지정 */
+.show {
+    font-size: 20px;
+    color: royalblue;
+}
+
+p[text] {
+    width: 100px;
+    color: aquamarine;
+}
+
+input[type='text'] {
+    width: 100px;
+    background-color: cornflowerblue;
+}
+
+input[type='submit'] {
+    width: 100px;
+    color: seagreen;
+}

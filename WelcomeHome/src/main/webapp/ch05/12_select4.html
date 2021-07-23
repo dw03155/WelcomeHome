@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ch05/12_select4.html</title>
+</head>
+<body>
+    <h3>선택사항을 직접 입력하세요.</h3>
+    <form>
+        <label>전공분야를 입력하세요.
+            <input type="text" list="majorlist" name="major">
+            <datalist id="majorlist">
+                <option value="Software">소프트웨어</option>
+                <option value="Robot">로봇</option>
+                <option value="System">시스템</option>
+                <option value="Service">서비스</option>
+                <option value="Education">교육</option>
+            </datalist>
+            <p></p>
+            <input type="submit" value="저장">
+            <input type="reset" value="초기화">
+        </label>
+    </form>
+</body>
+</html>

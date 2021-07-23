@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ch06/10_css_st.html</title>
+    <style>
+        h4:nth-child(5) {
+            background-color: yellow;
+        }
+
+        /* h4:nth-child(2n) {
+            background-color: cornflowerblue;
+        } */
+        h4:nth-last-child(2) {
+            background-color: chocolate;
+        }
+
+        h4:nth-of-type(3) {
+            background-color: pink;
+        }
+
+        h4:nth-last-of-type(2) {
+            background-color: powderblue;
+        }
+
+        p:only-child {
+            background-color: rebeccapurple;
+            color: white
+        }
+
+        span:only-of-type {
+            background-color: royalblue;
+            color: white
+        }
+
+        div:empty {
+            width: 50px;
+            height: 20px;
+            background-color: teal;
+        }
+    </style>
+</head>
+
+<body>
+    <p>웹프로그래밍-1</p>
+    <h4>웹프로그래밍-2</h4>
+    <h4>웹프로그래밍-3</h4>
+    <h4>웹프로그래밍-4</h4>
+    <h4>웹프로그래밍-5</h4>
+    <h4>웹프로그래밍-6</h4>
+    <h4>웹프로그래밍-7</h4>
+    <h4>웹프로그래밍-8</h4>
+    <h4>웹프로그래밍-9</h4>
+    <h4>웹프로그래밍-10</h4>
+    <h4>웹프로그래밍-11</h4>
+    <p>웹프로그래밍-12</p>
+    <div>
+        <p>웹프로그래밍-15</p>
+    </div>
+    <div>
+        <p>웹프로그래밍-13</p>
+        <span>웹프로그래밍-14</span>
+    </div>
+    <div></div>
+</body>
+
+</html>

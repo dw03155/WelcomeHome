@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ch04/14_audio.html</title>
+</head>
+<body>
+    <h3>오디오 자동 재생</h3>
+    <audio src="../img/eagle.mp3" controls loop autoplay></audio>
+    <h3>오디오 수동 재생</h3>
+    <audio src="../img/bear.mp3" controls></audio>
+    <h3>오디오 다중 재생</h3>
+    <audio controls>
+        <source src="../img/chicken.mp3" type="audio/mpeg">
+        <source src="../img/chicken.ogg" type="audio/ogg">
+        <source src="../img/chicken.wav" type="audio/wav">
+        오디오 파일을 재생할 수 없습니다.
+    </audio>
+</body>
+</html>

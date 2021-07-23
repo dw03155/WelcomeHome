@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ch07/09_position.html</title>
+    <style>
+        div {
+            background-color: plum;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            /* 오른쪽은 없음(왼쪽값 음수 만들어줘야함) */
+            /* left:10px; */
+            width: 300px;
+        }
+
+        p {
+            /* 위치가 고정 */
+            position: static;
+            left: 30px;
+            width: 100px;
+            height: 30px;
+            background-color: mediumpurple;
+            margin: 10px 0;
+            color: white;
+        }
+
+        /* p.content{
+            원래의 위치에서 상대적인 위치
+        position: relative;
+        left: 50px;
+        top: 30px;
+        } */
+
+        /* p.content {
+            position: fixed;
+            left: 50px;
+            top: 30px;
+        } */
+
+        p.content {
+            /* 아래위로 이동해도 같은 위치 */
+            position: sticky;
+            left: 50px;
+            top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <p>Content-1</p>
+        <p>Content-2</p>
+        <p>Content-3</p>
+        <p class="content">Content-4</p>
+        <p>Content-5</p>
+        <p>Content-6</p>
+        <p>Content-7</p>
+        <p>Content-8</p>
+        <p>Content-9</p>
+        <p>Content-10</p>
+        <p>Content-11</p>
+        <p>Content-12</p>
+        <p>Content-13</p>
+        <p>Content-14</p>
+        <p>Content-15</p>
+        <p>Content-16</p>
+        <p>Content-17</p>
+        <p>Content-18</p>
+        <p>Content-19</p>
+        <p>Content-20</p>
+        <p>Content-21</p>
+        <p>Content-22</p>
+        <p>Content-23</p>
+        <p>Content-24</p>
+        <p>Content-25</p>
+        <p>Content-26</p>
+        <p>Content-27</p>
+        <p>Content-28</p>
+        <p>Content-29</p>
+        <p>Content-30</p>
+    </div>
+</body>
+
+</html>

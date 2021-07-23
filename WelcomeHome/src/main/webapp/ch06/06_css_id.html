@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>ch06/06_css_id.html</title>
+    <link rel="stylesheet" href="myStyle.css">
+    <style>
+        p {
+            background-color: lightblue;
+        }
+
+        h2 {
+            background-color: lightgoldenrodyellow;
+        }
+
+        /* #show : id값이 show인 것만 style 지정 */
+        h2#show {
+            color: rgb(156, 228, 123);
+        }
+
+        #show {
+            color: rgb(181, 123, 228);
+        }
+
+        /* .show : class값이 show인 것만 style 지정 */
+        .show {
+            font-size: 20px;
+            color: royalblue;
+        }
+
+        input[text] {
+            width: 100px;
+            color: seagreen;
+        }
+
+        input[type='text'] {
+            width: 100px;
+            background-color: seagreen;
+        }
+
+        input[type='submit'] {
+            width: 100px;
+            color: seagreen;
+        }
+    </style>
+</head>
+
+<body>
+    <p style="background-color: lightcoral;">요소1</p>
+    <h2>요소2</h2>
+    <h2 id="show">요소2-1</h2>
+    <h2>요소2-2</h2>
+    <div>요소3</div>
+    <span id="show">요소4</span>
+    <p class="show">요소5</p>
+    <p class="show">요소6</p>
+    <form action="">
+        이름 : <input type="text" name="" id=""> <br>
+        비밀번호 : <input type="password" name="" id=""> <br>
+        아이디 : <input type="number" name="" id=""> <br>
+        <input type="submit" value="로그인">
+    </form>
+</body>
+
+</html>
