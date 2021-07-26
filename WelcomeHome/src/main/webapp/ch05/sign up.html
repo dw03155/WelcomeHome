@@ -145,14 +145,18 @@
                 </tbody>
             </table>
             <hr size="1" noshade width="300">
-            <input type="checkbox" id="email_check" checked>사이트의 이메일을 수신합니다.<br>
-            <input type="checkbox" id="sms_check" style="border-block-start-color: tomato;" checked>사이트의 SMS를 수신합니다.<br>
-            <br>
-            <input type="reset" value="가입취소"
-                style="min-width:100px; min-height:30px; border-color: black; background-color: black; color:white;">
+            <div style="margin-left: 350px; text-align: left;">
+                <input type="checkbox" id="email_check" checked>사이트의
+                이메일을 수신합니다.<br>
+                <input type="checkbox" id="sms_check" checked>사이트의 SMS를 수신합니다.<br>
+            </div>
+            <input type="button" value="가입취소" onclick='window.close()'
+            style="min-width:100px; min-height:30px; border-color: black; background-color: black; color:white;">
+            <!-- <input type="reset" value="가입취소" -->
+            <!-- style="min-width:100px; min-height:30px; border-color: black; background-color: black; color:white;"> -->
             <input type="submit" value="회원가입"
                 style="min-width:100px; min-height:30px; border-color: tomato; background-color: tomato; color:white;">
-                <hr size="1" noshade width="300" align="center">
+            <hr size="1" noshade width="300" align="center">
         </form>
     </center>
 </body>

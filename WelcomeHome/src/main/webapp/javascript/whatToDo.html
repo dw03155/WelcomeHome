@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>javascript/whatToDo.html</title>
+</head>
+
+<body>
+    <img src="https://www.w3schools.com/js/pic_bulboff.gif" alt="">
+    <button onclick='turnOn()'>TrunOn</button>
+    <button onclick='trunOff()'>TrunOff</button>
+    <script>
+        function turnOn() {
+            let img = document.getElementsByTagName('img')[0];
+            //let은 모든 타입 가능 //getElementsByTagName() :()과 같은 태그로 된 요소를 가져옴.
+            img.src = "https://www.w3schools.com/js/pic_bulbon.gif"; //src 속성 바꿈
+        }
+
+        function trunOff() {
+            let img = document.getElementsByTagName('img')[0];
+            img.src = "https://www.w3schools.com/js/pic_bulboff.gif";
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>javascript/variable.html</title>
+    <!-- <script src="js/variable.js"></script>
+    <script src="js/variable1.js"></script>
+    <script src="js/variable2.js"></script>
+    <script src="js/variable3.js"></script> -->
+    <script>
+        // var num1 = 10;
+        // console.log('global : ' + num1);
+
+        // function tempFnc() {
+        //     // var num1 = 20; // function 안에서만 쓸 수 있는 변수 선언
+        //     num1 = 20; // 위의 변수 그대로 가져옴
+        //     console.log('local : ' + num1);
+        // }
+
+        // tempFnc();
+        // console.log('global : ' + num1);
+
+
+        
+        let num1 = 10; //전역변수
+        console.log('global : ' + num1);
+
+        function tempFnc() {
+            num1 = 20; 
+            num2 = 30; //선언하지 않은 변수도 사용 가능
+            console.log('local : ' + num1+','+num2);
+        }
+
+        tempFnc();
+        console.log('global : ' + num1+','+num2);
+    </script>
+</head>
+
+<body>
+    <script></script>
+</body>
+
+</html>
