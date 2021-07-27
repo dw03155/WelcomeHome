@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>javascript/function3.html</title>
+</head>
+
+<body>
+    <p>내용1</p>
+    <p>내용2</p>
+    <p>내용3</p>
+    <p>내용4</p>
+    <p>내용5</p>
+
+    <script>
+        let bodies = document.getElementsByTagName('body');
+        console.log(bodies[0].children[0].innerHTML); //공백 포함 안됨, 태그 있는 것만 자식으로 생각, textnode는 읽어올 수 없음
+        console.log(bodies[0].children[0].childNodes[0].nodeValue);
+        console.log(bodies[0].childNodes[1].innerHTML); //공백까지 포함
+        console.log(this);
+        let pTag = document.getElementsByTagName('p'); // HTML Collection
+        pTag = document.querySelectorAll('p'); //NodeList
+        // pTag = document.querySelectorAll('body>p');
+        console.log(pTag);
+        for (let i = 0; i < pTag.length; i++) {
+            pTag[i].onclick = clickFunc;
+            pTag[i].onmouseover = mover;
+            pTag[i].onmouseout = mout;
+            pTag[i].addEventListener('mouseout', mout); //매개값 : 이벤트이름과 기능
+        }
+
+        function mover() {
+            this.style.color = 'red';
+        }
+
+        function mout() {
+            this.style.color = 'blue';
+        }
+
+        function clickFunc() {
+            // 속성 node로 가져올 수도 있고 innerHTML(태그 포함, 태그 포함하지 않은 건 innerText)로 가져올 수 있다.
+            window.alert(this.innerHTML);
+            // console.log(this.childNodes[0].nodeType);
+            console.log(this.firstChild.nodeValue);
+            console.log(this.innerHTML);
+        }
+    </script>
+</body>
+
+</html>

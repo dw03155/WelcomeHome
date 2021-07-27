@@ -15,7 +15,7 @@ let hob = 'hobby';
 console.log('취미 : ' + obj[hob][2]);
 
 const mem1 = {
-    id: 'user1',
+    id: 'user1', //key value 형식
     name: '홍길동',
     passwd: '1234'
 }
