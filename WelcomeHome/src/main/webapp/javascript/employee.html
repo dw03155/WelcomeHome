@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let jsonData =
+            `[{"id":1,"first_name":"Dal","last_name":"Godson","email":"dgodson0@hhs.gov","gender":"Genderqueer"},
+{"id":2,"first_name":"Aube","last_name":"Euesden","email":"aeuesden1@businesswire.com","gender":"Bigender"},
+{"id":3,"first_name":"Bert","last_name":"Bohlsen","email":"bbohlsen2@loc.gov","gender":"Polygender"},
+{"id":4,"first_name":"Kory","last_name":"Tydd","email":"ktydd3@smh.com.au","gender":"Genderfluid"},
+{"id":5,"first_name":"Ruby","last_name":"Skelhorne","email":"rskelhorne4@123-reg.co.uk","gender":"Male"},
+{"id":6,"first_name":"Stefanie","last_name":"Bolan","email":"sbolan5@mapquest.com","gender":"Genderqueer"},
+{"id":7,"first_name":"Tobye","last_name":"Sumpner","email":"tsumpner6@oakley.com","gender":"Genderfluid"},
+{"id":8,"first_name":"Jamal","last_name":"Appleford","email":"jappleford7@epa.gov","gender":"Genderfluid"},
+{"id":9,"first_name":"Korry","last_name":"Ghelardoni","email":"kghelardoni8@microsoft.com","gender":"Non-binary"},
+{"id":10,"first_name":"Skipper","last_name":"Anstiss","email":"sanstiss9@sciencedaily.com","gender":"Genderqueer"}]`
+        // ` : string 타입으로 인식
+        let objData = JSON.parse(jsonData);
+
+        //console.log('1'); // 1-3-2순서로 실행
+        document.addEventListener('DOMContentLoaded', function () { //document object load될 때 ul 실행
+            // let ul = document.createElement('ul');
+            let tbody = document.querySelector('#list > tbody');
+
+            for (let i = 0; i < objData.length; i++) {
+                // console.log(objData[i].id); //id만 가져오기
+                // console.log(objData[i].first_name); //first_name만 가져오기
+                // console.log(objData[i].last_name); //last_name만 가져오기
+                // let tr = document.createElement('tr');
+                // li.onclick = function () {
+                //     window.alert(this.innerHTML);
+                // };
+                // li.addEventListener('mouseover', function () {
+                //     this.style.backgroundColor = 'lightskyblue';
+                //     this.style.color = 'white';
+                // })
+                // li.appendChild(text);
+                // ul.appendChild(li);
+                let tr = document.createElement('tr');
+                for (let field in objData[0]) {
+                    let td = document.createElement('td');
+                    let text = document.createTextNode(objData[i][field]);
+                    td.appendChild(text);
+                    tr.appendChild(td);
+                }
+                let td = document.createElement('td');
+                let btn = document.createElement('input');
+                btn.type = 'button';
+                btn.value = '삭제';
+                td.appendChild(btn);
+                tr.appendChild(td);
+                tbody.appendChild(tr);
+                // document.getElementById('show').appendChild(ul);
+                //console.log('2');
+            }
+        });
+        //console.log('3');
+    </script>
+</head>
+
+<body>
+    <div id="show">
+        <table id='list'>
+            <tr>
+                <th>사원번호</th>
+                <th>성</th>
+                <th>이름</th>
+                <th>메일</th>
+                <th>성별</th>
+                <th>삭제</th>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

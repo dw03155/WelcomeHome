@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>javascript/board.html</title>
+    <meta name="generator" content="editplus" />
+    <meta name="author" content="" />
+    <style type="text/css">
+        #list {
+            width: 500px;
+            border: 1px solid black;
+            /*겉테두리와 안테두리를 합함 */
+            border-collapse: collapse;
+        }
+
+        #list td,
+        #list th {
+            font-size: 12px;
+            border: 1px solid black;
+            padding: 3px;
+        }
+
+        #list th {
+            background-color: cornflowerblue;
+        }
+
+        #list .td1 {
+            width: 6px;
+            text-align: center;
+        }
+
+        #list .td2 {
+            width: 130px;
+            text-align: center;
+        }
+
+        #list .td3 {
+            width: 50px;
+            text-align: center;
+        }
+
+        #list .td4 {
+            width: 50px;
+            text-align: center;
+        }
+
+        #list .td5 {
+            width: 6px;
+            text-align: center;
+        }
+
+        /*부모 자식 관계 */
+        #list .altRow {
+            background-color: rgb(220, 241, 253);
+            /* lightblue; */
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div id='inputForm'>
+        <form name='bfm' action="aaa.html" onsubmit="submitBoard(event)">
+            번호 : <input type="number" name="num" id="num" value="1"><br>
+            제목 : <input type="text" name="title" id="title" value="테스트"><br>
+            이름 : <input type="text" name="writer" id="writer" value="hazzys"><br>
+            날짜 : <input type="date" name="regDate" id="regDate" value="2021-07-28"><br>
+            <input type="submit" value="등록">
+            <input type="button" value="수정">
+        </form>
+    </div>
+
+    <h3>게시판 리스트</h3>
+    <input id="delBtn" type="button" value="삭제">
+
+    <table id="list">
+        <thead>
+            <tr>
+                <th class="td1">번호</th>
+                <th class="td2">제목</th>
+                <th class="td3">이름</th>
+                <th class="td4">날짜</th>
+                <th class="td5">선택</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- <tr>
+                <td class="td1">1</td>
+                <td class="td2">게시판 만들기 연습입니다.</td>
+                <td class="td3">홍길동</td>
+                <td class="td4">2012-01-05</td>
+                <td class="td5"><input type="checkbox"></td>
+            </tr>
+            <tr class="altRow">
+                <td class="td1">2</td>
+                <td class="td2">게시판 만들기 연습입니다.</td>
+                <td class="td3">홍길동</td>
+                <td class="td4">2012-01-06</td>
+                <td class="td5"><input type="checkbox"></td>
+
+            </tr>
+
+            <tr>
+                <td class="td1">3</td>
+                <td class="td2">게시판 만들기 연습입니다.</td>
+                <td class="td3">홍길동</td>
+                <td class="td4">2012-01-07</td>
+                <td class="td5"><input type="checkbox"></td>
+            </tr>
+            <tr class="altRow">
+                <td class="td1">4</td>
+                <td class="td2">게시판 만들기 연습입니다.</td>
+                <td class="td3">홍길동</td>
+                <td class="td4">2012-01-08</td>
+                <td class="td5"><input type="checkbox"></td>
+            </tr> -->
+        </tbody>
+    </table>
+
+    <script src="js/board.js"></script>
+</body>
+
+</html>
