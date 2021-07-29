@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>javascript/employee.html</title>
+    <script src="js/employee.js"></script>
     <script>
         let jsonData =
             `[{"id":1,"first_name":"Dal","last_name":"Godson","email":"dgodson0@hhs.gov","gender":"Genderqueer"},
@@ -19,7 +20,7 @@
 {"id":9,"first_name":"Korry","last_name":"Ghelardoni","email":"kghelardoni8@microsoft.com","gender":"Non-binary"},
 {"id":10,"first_name":"Skipper","last_name":"Anstiss","email":"sanstiss9@sciencedaily.com","gender":"Genderqueer"}]`
         // ` : string 타입으로 인식
-        let objData = JSON.parse(jsonData);
+        let objData = JSON.parse(jsonData); //json 형식을 object형식으로 변환
 
         //console.log('1'); // 1-3-2순서로 실행
         document.addEventListener('DOMContentLoaded', function () { //document object load될 때 ul 실행
@@ -40,23 +41,14 @@
                 // })
                 // li.appendChild(text);
                 // ul.appendChild(li);
-                let tr = document.createElement('tr');
-                for (let field in objData[0]) {
-                    let td = document.createElement('td');
-                    let text = document.createTextNode(objData[i][field]);
-                    td.appendChild(text);
-                    tr.appendChild(td);
-                }
-                let td = document.createElement('td');
-                let btn = document.createElement('input');
-                btn.type = 'button';
-                btn.value = '삭제';
-                td.appendChild(btn);
-                tr.appendChild(td);
-                tbody.appendChild(tr);
+
+                let newTr = makeRow(objData[i]);
+                tbody.appendChild(newTr);
+
                 // document.getElementById('show').appendChild(ul);
                 //console.log('2');
             }
+            document.getElementById('list').setAttribute('border', '1');
         });
         //console.log('3');
     </script>
@@ -65,14 +57,17 @@
 <body>
     <div id="show">
         <table id='list'>
-            <tr>
-                <th>사원번호</th>
-                <th>성</th>
-                <th>이름</th>
-                <th>메일</th>
-                <th>성별</th>
-                <th>삭제</th>
-            </tr>
+            <thead>
+                <tr>
+                    <th>사원번호</th>
+                    <th>성</th>
+                    <th>이름</th>
+                    <th>메일</th>
+                    <th>성별</th>
+                    <th>삭제기능</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
         </table>
     </div>
 </body>

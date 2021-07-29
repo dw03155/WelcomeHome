@@ -2,25 +2,29 @@
 <html lang="en">
 
 <head>
-    <title>javascript/board copy.html</title>
+
+    <title>javascript/boardEx.html</title>
+    <meta name="generator" content="editplus" />
+    <meta name="author" content="김종현" />
     <style type="text/css">
+        /*디자인은 큰틀부터 디자인하자.*/
         #list {
             width: 500px;
-            /* border: 1px solid black; */
-            /* 겉테두리와 안테두리를 합함 */
-            /* border-collapse: collapse; */
+            border: 1px solid orange;
+            /*겉테두리와 안테두리를 하나로 합쳐준다. */
+            border-collapse: collapse;
         }
 
+        /* 누구 자식인지 반드시 명시해 준다.*/
         #list td,
         #list th {
             font-size: 12px;
-            /* border: 1px solid black; */
+            border: 1px solid orange;
             padding: 3px;
-            border-bottom: solid 1px black;
         }
 
         #list th {
-            background-color: cornflowerblue;
+            background-color: #cc99cc;
         }
 
         #list .td1 {
@@ -43,116 +47,64 @@
             text-align: center;
         }
 
+        #list .td5 {
+            width: 5px;
+            text-align: center;
+        }
+
         /*부모 자식 관계 */
         #list .altRow {
-            background-color: rgb(220, 241, 253);
+            background-color: #e0f0b5;
         }
     </style>
 
-    <script>
-        function createBoard(num, title, writer, regDate) {
-
-            let trTag = document.createElement('tr');
-            var table = document.getElementById('list');
-            
-            if(table.rows.length % 2 == 0){
-                // trTag.style.backgroundColor = "rgb(220, 241, 253)";
-                trTag.setAttribute('class', 'altRow');
-            }
-            let tbody = document.createElement('tbody');
-
-            let tdTag1 = document.createElement('td');
-            tdTag1.setAttribute('class', 'td1')
-            let tdTag2 = document.createElement('td');
-            tdTag2.setAttribute('class', 'td2')
-            let tdTag3 = document.createElement('td');
-            tdTag3.setAttribute('class', 'td3')
-            let tdTag4 = document.createElement('td');
-            tdTag4.setAttribute('class', 'td4')
-            trTag.append(tdTag1, tdTag2, tdTag3, tdTag4);
-
-            let numText = document.createTextNode(num);
-            tdTag1.appendChild(numText);
-
-            let titleText = document.createTextNode(title);
-            tdTag2.appendChild(titleText);
-
-            let writerText = document.createTextNode(writer);
-            tdTag3.appendChild(writerText);
-
-            let regDateText = document.createTextNode(regDate);
-            tdTag4.appendChild(regDateText);
-
-            return trTag;
-        }
-
-        function submitBoard(ev) {
-            ev.preventDefault();
-            if (document.bfm.num.value == '') {
-                alert('번호를 입력하세요.')
-                document.bfm.num.focus();
-                return;
-            }
-            if (document.bfm.title.value == '') {
-                alert('제목을 입력하세요.')
-                document.bfm.title.focus();
-                return;
-            }
-            if (document.bfm.writer.value == '') {
-                alert('이름을 입력하세요.')
-                document.bfm.writer.focus();
-                return;
-            }
-            if (document.bfm.regDate.value == '') {
-                alert('날짜를 입력하세요.')
-                document.bfm.regDate.focus();
-                return;
-            }
-            let num = document.bfm.num.value;
-            let title = document.bfm.title.value;
-            let writer = document.bfm.writer.value;
-            let regDate = document.bfm.regDate.value;
-
-            let bList = document.getElementById('list').children[1];
-            // let bList = document.getElementById('list').childNodes[3];
-            if (bList.childNodes.length) { //크기가 0 일때 false, 0이 아닐 때 true
-                bList.insertBefore(createBoard(num, title, writer, regDate), bList.firstChild);
-            } else {
-                bList.appendChild(createBoard(num, title, writer, regDate));
-            }
-
-            //저장 후 입력값 지움.
-            // document.bfm.num.value = '';
-            // document.bfm.title.value = '';
-            // document.bfm.writer.value = '';
-            // document.bfm.regDate.value = '';
-            // document.bfm.num.focus()
-
-        }
-    </script>
 </head>
 
 <body>
-    <form name='bfm' action="aaa.html" onsubmit="submitBoard(event)">
-        번호 : <input type="number" name="num" id="num" value='10'><br>
-        제목 : <input type="text" name="title" id="title" value='날씨예보'><br>
-        이름 : <input type="text" name="writer" id="writer" value='기상청'><br>
-        날짜 : <input type="date" name="regDate" id="regDate" value='2021-07-12'><br>
-        <input type="submit" value="저장">
-    </form>
 
-    <h3>게시판 목록</h3>
-    <table id="list" cellpadding="3" cellspacing="0" border="0">
-        <thead>
-            <tr>
-                <th class="td1">번호</th>
-                <th class="td2">제목</th>
-                <th class="td3">이름</th>
-                <th class="td4">날짜</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
+    <!-- Ex21_board.htm -->
+
+    <h3>게시판 리스트</h3>
+    <table id="list">
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>이름</th>
+            <th>날짜</th>
+            <th>읽음</th>
+        </tr>
+
+        <tr>
+            <td class="td1">55</td>
+            <td class="td2">게시판 만들기 연습입니다.</td>
+            <td class="td3">홍길동</td>
+            <td class="td4">2012년 1월 5일</td>
+            <td class="td5">25</td>
+        </tr>
+        <tr class="altRow">
+            <td class="td1">56</td>
+            <td class="td2">게시판 만들기 연습입니다.</td>
+            <td class="td3">홍길동</td>
+            <td class="td4">2012년 1월 5일</td>
+            <td class="td5">25</td>
+
+        </tr>
+
+        <tr>
+            <td class="td1">5</td>
+            <td class="td2">게시판 만들기 연습입니다.</td>
+            <td class="td3">홍길동</td>
+            <td class="td4">2012년 1월 5일</td>
+            <td class="td5">25</td>
+        </tr>
+        <tr class="altRow">
+            <td class="td1">5</td>
+            <td class="td2">게시판 만들기 연습입니다.</td>
+            <td class="td3">홍길동</td>
+            <td class="td4">2012년 1월 5일</td>
+            <td class="td5">25</td>
+        </tr>
+
     </table>
 
 </body>

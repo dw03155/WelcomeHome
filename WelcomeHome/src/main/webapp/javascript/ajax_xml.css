@@ -1,0 +1,44 @@
+.title {
+    border-bottom: 1px solid black;
+    width: 511px;
+    height: 35px;
+    line-height: 35px;
+}
+
+#show>div:nth-of-type(2n) {
+    background-color: lavender;
+}
+
+.row {
+    border-bottom: 1px solid black;
+    width: 511px;
+    height: 35px;
+    line-height: 35px;
+    display: inline-block;
+}
+
+span {
+    color: black;
+    padding: 15px;
+}
+
+strong {
+    text-align: end;
+}
+
+.pagination button {
+    color: black;
+    float: left;
+    padding: 4px 4px;
+    width: 32px;
+    height: 32px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+}
+
+.pagination button.active {
+    background-color: rgb(155, 68, 226);
+    color: white;
+    border: 1px solid rgb(155, 68, 226);
+}
