@@ -15,12 +15,25 @@ public class DAO {
 
 	public void connect() {
 		try {
+			// 1. 드라이버 로딩
 			Class.forName("oracle.jdbc.driver.OracleDriver");
+			// 2. DB 연결
 			String url = "jdbc:oracle:thin:@localhost:1521:xe";
-			conn = DriverManager.getConnection(url, "hazzys", "dhgPwl7#");
+			conn = DriverManager.getConnection(url, "hr", "hr");
 			System.out.println("DB에 연결되었습니다.");
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
+		}
+	}
+
+	public void disconnect() {
+		if (conn != null) {
+			try {
+				// 5. 연결종료
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }

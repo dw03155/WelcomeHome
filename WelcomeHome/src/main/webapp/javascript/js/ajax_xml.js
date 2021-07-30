@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     //비동기적(asynchronous) 방식 - 한꺼번에 요청 후 처리되는 순서대로 출력
     let btns = document.querySelectorAll('.pagination>button');
     for (let i = 0; i < btns.length; i++) {
+        //클릭 이벤트 시 button의 클래스를 초기화.
         btns[i].addEventListener('click', function () {
             for (let i = 0; i < btns.length; i++) {
                 btns[i].className = '';
