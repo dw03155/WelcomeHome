@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jquery/basic.html</title>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>
+        //jquery $(선택자).메소드(기능) //선택자= document.getElementById()와 같음
+        $(document).ready(function () { //document페이지 실행되고 난 후에 실행
+            $('#show').html('Hello World'); // element.innerHTML ="Hello World"와 같음
+            let ul = $('<ul />');
+            ul.append($('<li />').html('Apple'));
+            ul.append($('<li />').html('Banana'));
+
+            $('#show').append(ul);
+
+            // 삭제
+            $('ul').remove();
+            // 이벤트
+            let btn = $('<button />').html('Del').on('click', function () {
+                console.log('delete');
+            });
+            $('#show').append(btn);
+        });
+    </script>
+</head>
+
+<body>
+    <div id='show'></div>
+</body>
+
+</html>

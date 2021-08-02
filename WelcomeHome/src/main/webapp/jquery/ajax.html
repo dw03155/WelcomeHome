@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jquery/ajax.html</title>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: 'MOCK_DATA.json', //요청 페이지
+                // data: 'page-1',
+                data: {
+                    page: 1
+                },
+                method: 'get',
+                dataType: 'json',
+                // success: function (result) {
+                //     console.log(result);
+                // },
+                success: successCallBack,
+                error: function (reject) {
+                    console.log(reject)
+                }
+            }); //XMLHttpRequest();
+        });
+
+        function successCallBack(result) {
+            let data = result;
+            // for(let i = 0; i<data.length; i++) {}
+            for (let row of data) {
+                let div = $('<div/>').attr('class', 'row') //
+                    .html('<span>' + row.id + //
+                        '</span>&nbsp;&nbsp;&nbsp;<strong>' + //
+                        row.first_name + '-' + row.last_name + '</strong> ');
+                let btn = $('<button />').html('Del').on('click', delFnc);
+                $(div).append(btn);
+                $('#show').append(div);
+            }
+        }
+
+        function delFnc() {
+            // console.log($(this));
+            // console.log($(this).parent());
+            console.log( $(this).parent().remove())
+            // $(this).parent().remove();
+        }
+    </script>
+</head>
+
+<body>
+    <div id='show'>
+        <div class="row"><span>ID</span>&nbsp;&nbsp;&nbsp;<strong>FIRST NAME - LAST NAME</strong></div>
+    </div>
+</body>
+
+</html>
