@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>board/commentList.html</title>
+	<script>
+		//HTML(UI)-JAVA(Servlet,DAO)-DB
+		window.onload = function () { //페이지 다 읽은 후에 실행
+			loadCommentList();
+		}
+		// 목록조회
+		function loadCommentList() {
+			let xhtp = new XMLHttpRequest();
+			xhtp.open('get', '../CommentServlet?cmd=selectAll'); //화면구성
+			xhtp.send();
+			xhtp.onload = loadCommentResult;
+			//		xhtp.onload = function(){
+			//			console.log(xhtp.responseXML); //xml로 받아올 수 있는지 체크
+			//		}
+		}
+
+		// 목록조회 콜백
+		function loadCommentResult() {
+			let xmlDoc = this.responseXML;
+			let code = xmlDoc.getElementsByTagName('code')[0].innerHTML;
+			if (code == 'success') {
+				let commentList = xmlDoc.getElementsByTagName('row'); //태그가 row인 값을 가지고 와서 리스트 생성
+				let listDiv = document.getElementById('commentList');
+				for (let i = 0; i < commentList.length; i++) { //목록을 listDiv에 붙여넣기
+					//데이터 한건을 가지고 태그생성
+					let commentDiv = makeCommentView(commentList[i])
+					listDiv.appendChild(commentDiv);
+				}
+			} else if (code == 'error') {
+				let msg = xmlDoc.getElementsByTagName('data')[0].innerHTML;
+				window.alert(msg);
+			}
+		}
+
+		function makeCommentView(comment) {
+			let div = document.createElement('div');
+			let id = comment.children[0].innerHTML //id 값
+			div.setAttribute('id', id) //div에 id값 올리기
+			let str = '<strong>' + comment.children[1].innerHTML //name 값
+				+
+				'</strong>' + comment.children[2].innerHTML //content 값
+				+
+				'<input type="button" value="수정" onclick="viewUpdateForm(' + id + ')">' +
+				'<input type="button" value="삭제" onclick="confirmDeletion()">';
+			div.innerHTML = str;
+			return div;
+		}
+		//글 등록
+		function addComment() {
+			//사용자가 입력할 때
+			let name = document.addForm.name.value;
+			let content = document.addForm.content.value;
+			if (name == "") {
+				alert('이름을 입력하세요.');
+				document.addForm.name.focus();
+				return;
+			}
+			if (content == "") {
+				alert('내용을 입력하세요.');
+				document.addForm.content.focus();
+				return;
+			}
+			let xhtp = new XMLHttpRequest(); //입력처리
+			let url = '../CommentServlet?cmd=insert&name=' + name + '&content=' + content;
+			xhtp.open('get', url);
+			xhtp.send();
+			xhtp.onload = addResult;
+		}
+		//댓글 등록 콜백
+		function addResult() {
+			let xmlDoc = this.responseXML;
+			let code = xmlDoc.getElementsByTagName('code')[0].innerHTML;
+			if (code == 'success') {
+				let listDiv = document.getElementById('commentList');
+				let comment = xmlDoc.getElementsByTagName('data')[0];
+				let commentDiv = makeCommentView(comment);
+				listDiv.appendChild(commentDiv);
+
+			} else if (code == 'error') {
+				let msg = xmlDoc.getElementsByTagName('data')[0].innerHTML;
+				window.alert(msg);
+			}
+		}
+
+		//수정버튼 클릭시
+		function viewUpdateForm(id) {
+			let updateFormDiv = document.getElementById('commentUpdate');
+			let commentDiv = document.getElementById(id);
+			console.log(commentDiv);
+		}
+	</script>
+</head>
+
+<body>
+	<!-- 댓글목록 -->
+	<div id='commentList'></div>
+	<!-- 댓글등록UI -->
+	<div id='commentAdd'>
+		<form name='addForm' action=''>
+			이름 : <input type='text' name='name' size='10'><br> 내용 :
+			<textarea name='content' cols='20' rows='3'></textarea>
+			<br> <input type='button' value='등록' onclick='addComment()'>
+		</form>
+	</div>
+	<!-- 댓글수정 -->
+	<div id='commentUpdate' style='display: none;'>
+		<form name='updateForm' action=''>
+			<input type='hidden' name='id'>
+			이름 : <input type='text' name='name' size='10'><br>
+			내용 : <textarea name='content' cols='20' rows='3'></textarea><br>
+			<input type='button' value='변경' onclick='updateComment()'>
+			<input type='button' value='취소' onclick='cancelUpdate()'>
+		</form>
+	</div>
+
+</body>
+
+</html>

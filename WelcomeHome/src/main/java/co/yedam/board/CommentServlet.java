@@ -31,39 +31,99 @@ public class CommentServlet extends HttpServlet {
 		String cmd = request.getParameter("cmd");
 
 		if (cmd == null) {
-			StringBuffer sb = new StringBuffer();
-			sb.append("<result>");// xml 데이터 타입으로 넘기려고
-			sb.append("<code>error</code>");
-			sb.append("<data>");
-			sb.append("cmd null");
-			sb.append("</data>");
-			sb.append("</result>");
-			out.print(sb.toString());
-
-		} else if (cmd.equals("selectAll")) {// select 조회
-			List<HashMap<String, Object>> list = CommentDAO.getInstance().selectAll();
-			StringBuffer sb = new StringBuffer();
-			sb.append("<result>");// xml 데이터 타입으로 넘기려고
-			sb.append("<code>success</code>");
-			for (HashMap<String, Object> map : list) {
+			out.println(errorXML("cmd null"));
+		} else if (cmd.equals("selectAll")) {// 전체 조회
+			try {
+//				Integer.parseInt("a"); // error 확인을 위해 발생시켜봄
+				List<HashMap<String, Object>> list = CommentDAO.getInstance().selectAll();
+				StringBuffer sb = new StringBuffer();
+				sb.append("<result>");// xml 데이터 타입으로 넘기려고
+				sb.append("<code>success</code>");
 				sb.append("<data>");
-				sb.append("<id>" + map.get("id") + "</id>");
-				sb.append("<name>" + map.get("name") + "</name>");
-				sb.append("<content>" + map.get("content") + "</content>");
+				for (HashMap<String, Object> map : list) {
+					sb.append("<row>");
+					sb.append("<id>" + map.get("id") + "</id>");
+					sb.append("<name>" + map.get("name") + "</name>");
+					sb.append("<content>" + map.get("content") + "</content>");
+					sb.append("</row>");
+				}
 				sb.append("</data>");
+				sb.append("</result>");
+				out.print(sb.toString());
+			} catch (Exception e) {
+				out.println(errorXML(e.getMessage()));
 			}
-			sb.append("</result>");
-			out.print(sb.toString());
+		} else if (cmd.equals("insert")) {// 한건입력
+			try {
+				String name = request.getParameter("name");
+				String content = request.getParameter("content");
+				// comment 안에 name, content 답기
+				Comment comment = new Comment();
+				comment.setName(name);
+				comment.setContent(content);
+				// commentdao class의 instance를 만들고 comment 전송
+				HashMap<String, Object> map = CommentDAO.getInstance().insert(comment);
+				out.println(dataXML(map));
+			} catch (Exception e) {
+				out.println(errorXML(e.getMessage()));
+			}
+		} else if (cmd.equals("update")) {// 수정
+//			try {
+				String id = request.getParameter("id");
+				String name = request.getParameter("name");
+				String content = request.getParameter("content");
 
-		} else if (cmd.equals("insert")) {// insert 입력
-			CommentDAO.getInstance();
+				Comment comment = new Comment();
+				comment.setId(id);
+				comment.setName(name);
+				comment.setContent(content);
+				
+				HashMap<String, Object> map = CommentDAO.getInstance().update(comment);
+				out.println(dataXML(map));
+//			} catch (Exception e) {
+//				out.println(errorXML(e.getMessage()));
+//			}
+		} else if (cmd.equals("delete")) {// 삭제
+//			try {
+//				String id = request.getParameter("id");
+//
+//				Comment comment = new Comment();
+//				comment.setId(id);
+//				
+//				HashMap<String, Object> map = CommentDAO.getInstance().delete(comment);
+//				out.println(dataXML(map));
+//			} catch (Exception e) {
+//				out.println(errorXML(e.getMessage()));
+//			}
 		}
+	}// end of DG
 
-	}
+	private String dataXML(HashMap<String, Object> map) {
+		StringBuffer sb = new StringBuffer();
+		sb.append("<result>");
+		sb.append("<code>success</code>");
+		sb.append("<data>");
+		sb.append("<id>" + map.get("id") + "</id>");
+		sb.append("<name>" + map.get("name") + "</name>");
+		sb.append("<content>" + map.get("content") + "</content>");
+		sb.append("</data>");
+		sb.append("</result>");
+
+		return sb.toString();
+	}// end of DXML
+
+	private String errorXML(String msg) {
+		StringBuffer sb = new StringBuffer();
+		sb.append("<result>");
+		sb.append("<code>error</code>");
+		sb.append("<data>" + msg + "</data>");
+		sb.append("</result>");
+
+		return sb.toString();
+	}// end of EXML
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
 	}
-
 }
