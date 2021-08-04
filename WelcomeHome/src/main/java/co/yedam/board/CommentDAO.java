@@ -36,7 +36,7 @@ public class CommentDAO extends DAO {
 			disconnect();// 접속을 끊어줘야 다음에 안되는 상황을 없애기
 		}
 		return list;
-	}//end of SA
+	}// end of SA
 
 	// 글등록
 	public HashMap<String, Object> insert(Comment comment) {
@@ -81,6 +81,7 @@ public class CommentDAO extends DAO {
 				conn.rollback();
 				HashMap<String, Object> map = new HashMap<String, Object>();
 				map.put("msg", e.getMessage());
+				
 				return map;
 
 			} catch (SQLException e1) {
@@ -90,7 +91,7 @@ public class CommentDAO extends DAO {
 			disconnect();
 		}
 		return null;
-	}//end of I
+	}// end of I
 
 	// 글수정
 	public HashMap<String, Object> update(Comment comment) {
@@ -101,9 +102,9 @@ public class CommentDAO extends DAO {
 			psmt.setString(2, comment.getContent());
 			psmt.setString(3, comment.getId());
 			int r = psmt.executeUpdate();
-
 			System.out.println("수정건수 : " + r);
-			HashMap<String, Object> map = new HashMap<>();
+
+			HashMap<String, Object> map = new HashMap<String, Object>();
 			map.put("id", comment.getId());
 			map.put("name", comment.getName());
 			map.put("content", comment.getContent());
@@ -115,28 +116,27 @@ public class CommentDAO extends DAO {
 			disconnect();
 		}
 		return null;
-	}//end of U
+	}// end of U
 
 	// 글삭제
-//	public HashMap<String, Object> delete(Comment comment) {
-//		connect();
-//		try {
-//			psmt = conn.prepareStatement("delete from comments where id = ?");
-//			psmt.setString(1, comment.getId());
-//			int r = psmt.executeUpdate();
-//
-//			System.out.println("삭제건수 : " + r);
-//			HashMap<String, Object> map = new HashMap<>();
-//			map.put("id", comment.getId());
-//			map.put("name", comment.getName());
-//			map.put("content", comment.getContent());
-//
-//			return map;
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			disconnect();
-//		}
-//		return null;
-//	}//end of D
+	public HashMap<String, Object> delete(String id) {
+		connect();
+		String sql = "delete from comments where id = ?";
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, id);
+			int r = psmt.executeUpdate();
+			System.out.println("삭제건수 : " + r);
+
+			map.put("id", id);
+
+			return map;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return null;
+	}// end of D
 }

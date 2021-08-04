@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>board/commentJson.html</title>
+	<script src="../js/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function () { //document 읽은 후에 function 실행
+			loadCommentList();
+		});
+		// 목록조회
+		function loadCommentList() {
+			//json 데이터 호출 ajax
+			$.ajax({
+				url: '../CommentServlet',
+				data: {
+					cmd: 'selectJson'
+				},
+				success: loadCommentResult,
+				error: function (reject) {
+					console.log(reject);
+				}
+			});
+		}
+		//목록조회 콜백
+		function loadCommentResult(resolve) {
+			let aryData = resolve;
+			for (let i = 0; i < aryData.length; i++) {
+				let commentDiv = makeCommentView(aryData[i]);
+				$('#commentList').append(commentDiv);
+			}
+		}
+		//object 1개를 매개값으로 받아서 div 반환해주는 함수
+		function makeCommentView(comment) {
+			let div = $('<div />').attr('id', comment.id);
+			$(div).attr({
+				'data-id': comment.id,
+				'data-name': comment.name,
+				'data-content': comment.content
+			});
+			let strong = $('<strong />').html(comment.name);
+			let span = $('<span />').html(comment.content)
+			let updateBtn = $('<input onclick="viewUpdateForm(' + comment.id + ')">').attr({
+				'type': 'button',
+				'value': '수정',
+				// 'data-content': comment.content
+			});
+			let deleteBtn = $('<input onclick="confirmDeletion(' + comment.id + ')">').attr({
+				'type': 'button',
+				'value': '삭제'
+			});
+
+			$(div).append(strong, span, updateBtn, deleteBtn);
+			return div;
+		}
+		//글등록
+		function addComment() {
+			let name = document.addForm.name.value;
+			let content = document.addForm.content.value;
+			if (name == '') {
+				alert('이름을 입력하세요');
+				document.addForm.name.focus();
+				return;
+			}
+			if (content == '') {
+				alert('내용을 입력하세요');
+				document.addForm.content.focus();
+				return;
+			}
+			$.ajax({
+				url: '../CommentServlet',
+				data: {
+					//'cmd=insertJson&name='+ name + '&content=' + content
+					cmd: 'insertJson',
+					name: name,
+					content: content
+				},
+				success: addResult,
+				error: function (reject) {
+					console.log(reject);
+				}
+
+			});
+		}
+		//글등록 콜백함수
+		function addResult(resolve) { // {id:?, name:?, content:?}
+			console.log(resolve);
+			let commentDiv = makeCommentView(resolve);
+			$('#commentList').append(commentDiv);
+			document.addForm.name.value = ''; //클릭 후 name칸 비워주기
+			document.addForm.content.value = ''; //클릭 후 content칸 비워주기
+			document.addForm.name.focus(); // name칸으로 커서 옮기기
+		}
+
+		function viewUpdateForm(id) {
+			let commentDiv = $('#' + id)
+			console.log(id);
+			updateForm.id.value = commentDiv.dataset.id;
+			updateForm.name.value = commentDiv.dataset.name;
+			updateForm.content.value = commentDiv.dataset.content;
+
+			$(commentDiv).after('#commentUpdate');
+			$('#commentUpdate').css('display', 'block');
+			$('#commentAdd').css('display', 'none');
+		}
+
+		//변경버튼
+		function updateComment() {
+			let id = updateForm.id.value;
+			let name = updateForm.name.value;
+			let content = updateForm.content.value;
+			$.ajax({
+				url: '../CommentServlet',
+				data: {
+					cmd: 'updateJson',
+					id: id,
+					name: name,
+					content: content
+				},
+				success: updateResult,
+				error: function (reject) {
+					console.log(reject);
+				}
+			});
+		}
+
+		function updateResult(resolve) {
+			console.log(resolve);
+			let commentDiv = makeCommentView(resolve)
+			let oldDiv = $('<div />').attr('id', comment.id);
+			parent.replaceChild(commentDiv, oldDiv);
+
+		}
+		//취소버튼
+		function cancelUpdate() {}
+
+		function confirmDeletion(id) {
+			$.ajax({
+				url: '../CommentServlet',
+				data: {
+					cmd: 'deleteJson',
+					id: id
+				// },
+				// success: deleteResult,
+				// error: function (reject) {
+				// 	console.log(reject);
+				}
+			});
+		}
+
+		function deleteResult(resolve) {
+			console.log(resolve);
+			$('#' + resolve).remove();
+		}
+	</script>
+</head>
+
+<body>
+	<!-- 댓글목록 -->
+	<div id='commentList'></div>
+	<!-- 댓글등록UI -->
+	<div id='commentAdd'>
+		<form name='addForm' action=''>
+			이름 : <input type='text' name='name' size='10'><br> 내용 :
+			<textarea name='content' cols='20' rows='3'></textarea>
+			<br> <input type='button' value='등록' onclick='addComment()'>
+		</form>
+	</div>
+	<!-- 댓글수정 -->
+	<div id='commentUpdate' style='display: none;'>
+		<form name='updateForm' action=''>
+			<input type='hidden' name='id'> 이름 : <input type='text' name='name' size='10'><br> 내용 :
+			<textarea name='content' cols='20' rows='3'></textarea>
+			<br> <input type='button' value='변경' onclick='updateComment()'>
+			<input type='button' value='취소' onclick='cancelUpdate()'>
+		</form>
+	</div>
+
+</body>
+
+</html>
