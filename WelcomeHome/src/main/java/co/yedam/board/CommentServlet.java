@@ -26,7 +26,7 @@ public class CommentServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// 한글로 나오는 처리
 		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/xml;charset-utf-8");
+		response.setContentType("text/xml;charset=utf-8");
 		response.setCharacterEncoding("utf-8");
 
 		// xml 데이터 만들기
@@ -35,9 +35,9 @@ public class CommentServlet extends HttpServlet {
 
 		if (cmd == null) {
 			out.println(errorXML("cmd null"));
-
+			// json 데이터 처리하기
 		} else if (cmd.equals("selectJson")) {
-			response.setContentType("text/json;charset-utf-8");
+			response.setContentType("text/json;charset=utf-8");//한글인식
 			List<HashMap<String, Object>> list = CommentDAO.getInstance().selectAll();
 
 			Gson gson = new GsonBuilder().create();
@@ -80,8 +80,8 @@ public class CommentServlet extends HttpServlet {
 			} catch (Exception e) {
 				out.println(errorXML(e.getMessage()));
 			}
-		} else if (cmd.equals("insertJson")) { //json데이터 수정
-			response.setContentType("text/json;charset-utf-8");
+		} else if (cmd.equals("insertJson")) { // json데이터 입력
+			response.setContentType("text/json;charset=utf-8");//한글인식
 			String name = request.getParameter("name");
 			String content = request.getParameter("content");
 			// comment 안에 name, content 답기
@@ -92,8 +92,8 @@ public class CommentServlet extends HttpServlet {
 			HashMap<String, Object> map = CommentDAO.getInstance().insert(comment);
 			Gson gson = new GsonBuilder().create();
 			out.println(gson.toJson(map));
+
 		} else if (cmd.equals("update")) {// 수정
-//			try {
 			String id = request.getParameter("id");
 			String name = request.getParameter("name");
 			String content = request.getParameter("content");
@@ -105,17 +105,34 @@ public class CommentServlet extends HttpServlet {
 
 			HashMap<String, Object> map = CommentDAO.getInstance().update(comment);
 			out.println(dataXML(map));
-//			} catch (Exception e) {
-//				out.println(errorXML(e.getMessage()));
-//			}
+
+		} else if (cmd.equals("updateJson")) { // json데이터 수정
+			response.setContentType("text/json;charset-utf-8");
+			String id = request.getParameter("id");
+			String name = request.getParameter("name");
+			String content = request.getParameter("content");
+			// comment 안에 name, content 답기
+			Comment comment = new Comment();
+			comment.setId(id);
+			comment.setName(name);
+			comment.setContent(content);
+			// commentdao class의 instance를 만들고 comment 전송
+			HashMap<String, Object> map = CommentDAO.getInstance().update(comment);
+			Gson gson = new GsonBuilder().create();
+			out.println(gson.toJson(map));
+
 		} else if (cmd.equals("delete")) {// 삭제
-//			try {
 			String id = request.getParameter("id");
 			HashMap<String, Object> map = CommentDAO.getInstance().delete(id);
 			out.println(dataXML(map));
-//			} catch (Exception e) {
-//				out.println(errorXML(e.getMessage()));
-//			}
+			
+		} else if (cmd.equals("deleteJson")) { // json데이터 수정
+			response.setContentType("text/json;charset-utf-8");
+			String id = request.getParameter("id");
+			// commentdao class의 instance를 만들고 comment 전송
+			HashMap<String, Object> map = CommentDAO.getInstance().delete(id);
+			Gson gson = new GsonBuilder().create();
+			out.println(gson.toJson(map));
 		}
 	}// end of DG
 

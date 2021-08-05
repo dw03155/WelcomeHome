@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>api/dataTableJS</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script>
+        //https://datatables.net/examples/data_sources/js_array.html
+        $(document).ready(function () {
+            $.ajax({
+                url: '../GetBoardServlet',
+                success: loadBoard,
+                error: function (reject) {
+                    console.log(reject);
+                }
+            });
+        });
+        
+        function loadBoard(resolve) {
+            console.log(resolve);
+            var dataSet = resolve.data;
+            $('#example').DataTable({ // 목록조회
+                data: dataSet,
+                columns: [
+                    {title: "Id"},
+                    {title: "Name"},
+                    {title: "Content"}
+                ]
+            });
+        }
+        </script>
+</head>
+
+<body>
+    <table id="example" class="display" style="width:100%"></table>
+</body>
+
+</html>

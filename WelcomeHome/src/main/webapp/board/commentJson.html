@@ -92,20 +92,21 @@
 			document.addForm.content.value = ''; //클릭 후 content칸 비워주기
 			document.addForm.name.focus(); // name칸으로 커서 옮기기
 		}
-
+		//수정버튼 클릭
 		function viewUpdateForm(id) {
-			let commentDiv = $('#' + id)
-			console.log(id);
+			let commentDiv = $('#' + id);
+			commentDiv = document.getElementById(id);
+			console.log(commentDiv);
 			updateForm.id.value = commentDiv.dataset.id;
 			updateForm.name.value = commentDiv.dataset.name;
 			updateForm.content.value = commentDiv.dataset.content;
 
-			$(commentDiv).after('#commentUpdate');
-			$('#commentUpdate').css('display', 'block');
-			$('#commentAdd').css('display', 'none');
+			$('#commentUpdate').css('display', 'block'); //수정화면 > 변경버튼, 취소버튼 보이도록
+			$('#commentUpdate').insertAfter($(commentDiv)); //댓글 밑에 수정화면 나타내기
+			$('#commentAdd').css('display', 'none'); //수정화면 > 등록버튼 안보이도록
 		}
 
-		//변경버튼
+		//수정버튼 클릭 > 변경버튼 클릭
 		function updateComment() {
 			let id = updateForm.id.value;
 			let name = updateForm.name.value;
@@ -118,40 +119,50 @@
 					name: name,
 					content: content
 				},
-				success: updateResult,
+				success: updateResult, //콜백 함수
 				error: function (reject) {
 					console.log(reject);
 				}
 			});
 		}
-
+		//글수정 콜백함수
 		function updateResult(resolve) {
 			console.log(resolve);
-			let commentDiv = makeCommentView(resolve)
-			let oldDiv = $('<div />').attr('id', comment.id);
-			parent.replaceChild(commentDiv, oldDiv);
-
+			let commentDiv = makeCommentView(resolve);
+			let oldDiv = $('#' + resolve.id);
+			//replaceWith : 요소를 바꿔주기
+			$(oldDiv).replaceWith(commentDiv);
+			//수정 완료 > 수정화면 숨기고 등록화면 다시 보이기
+			$('#commentUpdate').css('display', 'none');
+			$('#commentAdd').css('display', 'block');
+			// $('#commentUpdate').hide();
+			// $('#commentAdd').show();
 		}
-		//취소버튼
-		function cancelUpdate() {}
-
+		//수정화면 > 취소버튼 클릭 > 수정화면 숨기고 등록화면 다시 보이기
+		function cancelUpdate() {
+			$('#commentUpdate').css('display', 'none');
+			$('#commentAdd').css('display', 'block');
+			// $('#commentUpdate').hide();
+			// $('#commentAdd').show();
+		}
+		//글삭제
 		function confirmDeletion(id) {
 			$.ajax({
 				url: '../CommentServlet',
 				data: {
 					cmd: 'deleteJson',
 					id: id
-				// },
-				// success: deleteResult,
-				// error: function (reject) {
-				// 	console.log(reject);
+				},
+				success: deleteResult, //콜백 함수
+				error: function (reject) {
+					console.log(reject);
 				}
 			});
 		}
-
+		//글삭제 콜백함수
 		function deleteResult(resolve) {
 			console.log(resolve);
-			$('#' + resolve).remove();
+			$('#' + resolve.id).remove();
 		}
 	</script>
 </head>

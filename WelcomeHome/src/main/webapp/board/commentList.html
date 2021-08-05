@@ -99,8 +99,8 @@
 			updateForm.id.value = commentDiv.dataset.id; //id값을 dataset으로 불러와서 updateFrom에 넣음
 			updateForm.name.value = commentDiv.dataset.name;
 			updateForm.content.value = commentDiv.dataset.content;
-			updateFormDiv.style.display = 'block';
-			commentDiv.after(updateFormDiv);
+			updateFormDiv.style.display = 'block'; //수정화면 > 변경버튼, 취소버튼 보이도록
+			commentDiv.after(updateFormDiv);//댓글 밑에 수정화면 나타내기
 			document.getElementById('commentAdd').style.display = 'none'; //수정화면 > 등록버튼 안보이도록
 
 		}
