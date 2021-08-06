@@ -35,19 +35,18 @@ public class CommentServlet extends HttpServlet {
 
 		if (cmd == null) {
 			out.println(errorXML("cmd null"));
-			// json 데이터 처리하기
-		} else if (cmd.equals("selectJson")) {
+		// json 데이터 처리하기 
+		} else if (cmd.equals("selectJson")) { //전체 조회
 			response.setContentType("text/json;charset=utf-8");//한글인식
 			List<HashMap<String, Object>> list = CommentDAO.getInstance().selectAll();
 
 			Gson gson = new GsonBuilder().create();
-			gson.toJson(list);
 			String json = gson.toJson(list);
 			out.println(json);
 
 		} else if (cmd.equals("selectAll")) {// 전체 조회
 			try {
-//				Integer.parseInt("a"); // error 확인을 위해 발생시켜봄
+				//Integer.parseInt("a"); // error 확인을 위해 발생시켜봄
 				List<HashMap<String, Object>> list = CommentDAO.getInstance().selectAll();
 				StringBuffer sb = new StringBuffer();
 				sb.append("<result>");// xml 데이터 타입으로 넘기려고
