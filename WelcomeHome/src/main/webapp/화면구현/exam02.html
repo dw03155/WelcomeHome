@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exam02.html</title>
+    <script>
+        function ajax(url, page) {
+            let xhtp = new XMLHttpRequest();
+            xhtp.open('get', url);
+            xhtp.send();
+            xhtp.onload = function () {
+                let data = xhtp.responseXML;
+                let records = data.getElementsByTagName('record');
+                console.log(records)
+                let ul = document.createElement('ul');
+                for (let i = 0; i <= records.length; i++) {
+                    let li = document.createElement('li');
+                    let div1 = document.createElement('div');
+                    div1.innerText = records[i].children[0].innerHTML;
+                    let div2 = document.createElement('div');
+                    div2.innerText = records[i].children[1].innerHTML;
+                    let div3 = document.createElement('div');
+                    div3.innerText = records[i].children[5].innerHTML;
+                    li.append(div1, div2, div3);
+                    ul.appendChild(li);
+
+                    document.getElementById('show').appendChild(ul);
+                }
+            }
+        }
+        ajax('employees.xml', 1);
+    </script>
+</head>
+
+<body>
+    <div id="show">
+    </div>
+</body>
+
+</html>

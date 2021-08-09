@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exam01.html</title>
+    <style>
+    </style>
+    <script>
+        function ajax(url, page) {
+            let xhtp = new XMLHttpRequest();
+            xhtp.open('get', url);
+            xhtp.send();
+            xhtp.onload = function () {
+                let tbody = document.querySelector('#show > tbody');
+                let data = JSON.parse(xhtp.responseText);
+                let fData = data.forEach(function (val, idx) { //테이블만들기
+                    let tr = document.createElement('tr');
+                    let th1 = document.createElement('th');
+                    th1.innerHTML = val.mem_id;
+                    let th2 = document.createElement('th');
+                    th2.innerHTML = val.first_name;
+                    let th3 = document.createElement('th');
+                    th3.innerHTML = val.last_name;
+                    let th4 = document.createElement('th');
+                    th4.innerHTML = val.email;
+                    let th5 = document.createElement('th');
+                    th5.innerHTML = val.gender;
+                    let th6 = document.createElement('th');
+                    th6.innerHTML = val.address;
+                    tr.setAttribute('class', 'row');
+                    tr.append(th1, th2, th3, th4, th5, th6);
+                    tbody.appendChild(tr);
+                });
+            }
+        }
+
+        ajax('members.json', 1);
+    </script>
+</head>
+
+<body>
+
+    <div>
+        <table id = show>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Gender</th>
+                    <th>Address</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+</html>
